@@ -1,10 +1,10 @@
 .idea/workspace.xml
 .idea/uiDesigner.xml
 
-sandbox/out
+/out/
 
-sandbox/.gradle
-sandbox/build/
+sandbox/.gradle/
+/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
