@@ -2,11 +2,12 @@ package iss.work.addressbook.appmanager;
 
 import iss.work.addressbook.model.GroupData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class GroupHelper extends HelperBase {
 
-    public GroupHelper(FirefoxDriver driver) {
+    public GroupHelper(WebDriver driver) {
         super(driver);
     }
 
@@ -42,5 +43,16 @@ public class GroupHelper extends HelperBase {
 
     public void submitGroupModification() {
         click(By.name("update"));
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void createGroup(GroupData group) {
+        initGroupCreation();
+        fillGroupForm(group);
+        submitGroupCreation();
+        returnToGroupPage();
     }
 }

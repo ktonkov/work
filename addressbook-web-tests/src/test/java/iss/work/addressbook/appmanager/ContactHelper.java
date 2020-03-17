@@ -2,11 +2,15 @@ package iss.work.addressbook.appmanager;
 
 import iss.work.addressbook.model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 public class ContactHelper extends HelperBase {
 
-    public ContactHelper(FirefoxDriver driver) {
+    public ContactHelper(WebDriver driver) {
         super(driver);
     }
 
@@ -15,12 +19,19 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactForm(
-        ContactData contactData
+        ContactData contactData,
+        boolean construction
     ) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("home"), contactData.getHomePhone());
         type(By.name("email"), contactData.getEmail());
+
+        if (construction) {
+            new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void initContactCreationForm() {
@@ -49,5 +60,16 @@ public class ContactHelper extends HelperBase {
 
     public void returnToHomePage() {
         click(By.linkText("home page"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("entry"));
+    }
+
+    public void creatContact(ContactData contact) {
+        initContactCreationForm();
+        fillContactForm(contact, true);
+        submitContactForm();
+        returnToHomePage();
     }
 }

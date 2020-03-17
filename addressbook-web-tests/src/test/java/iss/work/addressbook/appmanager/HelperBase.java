@@ -1,12 +1,14 @@
 package iss.work.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class HelperBase {
-    protected FirefoxDriver driver;
+    protected WebDriver driver;
 
-    public HelperBase(FirefoxDriver driver) {
+    public HelperBase(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -18,8 +20,19 @@ public class HelperBase {
         By locator,
         String text
     ) {
-        click(locator);
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(text);
+        if (text != null && !driver.findElement(locator).getAttribute("value").equals(text)) {
+            click(locator);
+            driver.findElement(locator).clear();
+            driver.findElement(locator).sendKeys(text);
+        }
+    }
+
+    protected boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
     }
 }
