@@ -8,11 +8,11 @@ public class ContactData {
     private final String group;
 
     public ContactData(
-        String firstName,
-        String lastName,
-        String homePhone,
-        String email,
-        String group
+            String firstName,
+            String lastName,
+            String homePhone,
+            String email,
+            String group
     ) {
         this.firstName = firstName;
         this.lastName = lastName;

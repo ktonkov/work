@@ -1,6 +1,7 @@
 package iss.work.addressbook.appmanager;
 
 import java.util.concurrent.TimeUnit;
+
 import iss.work.addressbook.model.ContactData;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -47,41 +48,41 @@ public class ApplicationManager {
         driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
-          fail(verificationErrorString);
+            fail(verificationErrorString);
         }
     }
 
     private boolean isElementPresent(By by) {
-      try {
-        driver.findElement(by);
-        return true;
-      } catch (NoSuchElementException e) {
-        return false;
-      }
+        try {
+            driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     private boolean isAlertPresent() {
-      try {
-        driver.switchTo().alert();
-        return true;
-      } catch (NoAlertPresentException e) {
-        return false;
-      }
+        try {
+            driver.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
     }
 
     private String closeAlertAndGetItsText() {
-      try {
-        Alert alert = driver.switchTo().alert();
-        String alertText = alert.getText();
-        if (acceptNextAlert) {
-          alert.accept();
-        } else {
-          alert.dismiss();
+        try {
+            Alert alert = driver.switchTo().alert();
+            String alertText = alert.getText();
+            if (acceptNextAlert) {
+                alert.accept();
+            } else {
+                alert.dismiss();
+            }
+            return alertText;
+        } finally {
+            acceptNextAlert = true;
         }
-        return alertText;
-      } finally {
-        acceptNextAlert = true;
-      }
     }
 
     public GroupHelper getGroupHelper() {

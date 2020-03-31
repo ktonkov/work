@@ -4,9 +4,12 @@ import iss.work.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -19,8 +22,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactForm(
-        ContactData contactData,
-        boolean construction
+            ContactData contactData,
+            boolean construction
     ) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getLastName());
@@ -71,5 +74,13 @@ public class ContactHelper extends HelperBase {
         fillContactForm(contact, true);
         submitContactForm();
         returnToHomePage();
+    }
+
+    public List<WebElement> getContacts() {
+        return driver.findElements(By.name("selected[]"));
+    }
+
+    public int getContactCount() {
+        return getContacts().size();
     }
 }
