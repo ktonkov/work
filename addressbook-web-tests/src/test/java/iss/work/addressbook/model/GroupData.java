@@ -1,34 +1,41 @@
 package iss.work.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.util.Objects;
 
+@XStreamAlias("group")
 public class GroupData {
-    private final String name;
-    private int id;
-    private final String header;
-    private final String footer;
 
-    public GroupData(
-            int id,
-            String name,
-            String header,
-            String footer
-    ) {
-        this.id = id;
+    @XStreamOmitField
+    private int id;
+    @Expose
+    private String name;
+    @Expose
+    private String header;
+    @Expose
+    private String footer;
+
+    public GroupData withName(String name) {
         this.name = name;
-        this.header = header;
-        this.footer = footer;
+        return this;
     }
 
-    public GroupData(
-            String name,
-            String header,
-            String footer
-    ) {
-        this.id = 0;
-        this.name = name;
+    public GroupData withHeader(String header) {
         this.header = header;
+        return this;
+    }
+
+    public GroupData withFooter(String footer) {
         this.footer = footer;
+        return this;
+    }
+
+    public GroupData withId(int id) {
+        this.id = id;
+        return this;
     }
 
     public String getName() {
@@ -45,10 +52,6 @@ public class GroupData {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

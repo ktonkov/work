@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="iss.work.addressbook.tests.ContactCreationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-03-11T12:19:42" hostname="DESKTOP-5B2JM9M" time="1.668">
+<testsuite name="iss.work.addressbook.tests.ContactCreationTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-04-02T13:20:49" hostname="Xakaz-PC" time="45.195">
   <properties/>
-  <testcase name="testContactCreation" classname="iss.work.addressbook.tests.ContactCreationTests" time="1.668"/>
+  <testcase name="testContactCreation[0](iss.work.addressbook.model.ContactData@ef711a4c)" classname="iss.work.addressbook.tests.ContactCreationTests" time="17.165"/>
+  <testcase name="testContactCreation[1](iss.work.addressbook.model.ContactData@ef711a4d)" classname="iss.work.addressbook.tests.ContactCreationTests" time="7.147"/>
+  <testcase name="testContactCreation[2](iss.work.addressbook.model.ContactData@ef711a4e)" classname="iss.work.addressbook.tests.ContactCreationTests" time="20.873"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-1583929176381	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\ktonk\\AppData\\Local\\Temp\\rust_mozprofileBFP9tg"
-1583929177163	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
-1583929177163	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
-1583929177164	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
-1583929177164	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
-JavaScript error: undefined, line 14: Error: An unexpected error occurred
-JavaScript error: moz-extension://293b6fc4-59dd-45f7-b8e0-5b8682b4b3fe/lib/picture_in_picture_overrides.js, line 15: Error: Incorrect argument types for pictureInPictureParent.setOverrides.
-JavaScript error: resource:///modules/sessionstore/SessionStore.jsm, line 1325: uncaught exception: 2147746065
-1583929180661	Marionette	INFO	Listening on port 29115
-1583929181141	Marionette	WARN	TLS certificate errors will be ignored for this session
-Mar 11, 2020 7:19:41 PM org.openqa.selenium.remote.ProtocolHandshake createSession
-INFO: Detected dialect: W3C
+  <system-err><![CDATA[[1585833662.036][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833662.137][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833662.241][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833663.767][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833666.632][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833670.294][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833674.027][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833674.129][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833674.231][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833674.334][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833674.436][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833674.538][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833682.388][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833682.490][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833682.591][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833682.693][SEVERE]: Timed out receiving message from renderer: 0.100
+[1585833682.796][SEVERE]: Timed out receiving message from renderer: 0.100
 ]]></system-err>
 </testsuite>

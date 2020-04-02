@@ -1,8 +1,12 @@
 package iss.work.addressbook.appmanager;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import iss.work.addressbook.model.ContactData;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -10,13 +14,13 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import static org.testng.Assert.fail;
 
 public class ApplicationManager {
+    private String browser;
+    private final Properties properties;
     private WebDriver driver;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
@@ -26,7 +30,14 @@ public class ApplicationManager {
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
-    public void init(String browser) {
+    public ApplicationManager(String browser){
+        this.browser = browser;
+        properties = new Properties();
+    }
+
+    public void init() throws IOException {
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
         if (browser.equals(BrowserType.FIREFOX)) {
             //System.setProperty("webdriver.gecko.driver", "C:/Users/ktonk/Documents/geckodriver" +
             //    "/geckodriver.exe");
@@ -34,14 +45,13 @@ public class ApplicationManager {
         } else if (browser.equals(BrowserType.CHROME)) {
             driver = new ChromeDriver();
         }
-        baseUrl = "https://www.google.com/";
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://localhost:8082/addressbook/");
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        driver.get(properties.getProperty("web.baseUrl"));
         groupHelper = new GroupHelper(driver);
         contactHelper = new ContactHelper(driver);
         navigationHelper = new NavigationHelper(driver);
         sessionHelper = new SessionHelper(driver);
-        sessionHelper.login("admin", "secret");
+        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
     }
 
     public void stop() {
@@ -85,15 +95,15 @@ public class ApplicationManager {
         }
     }
 
-    public GroupHelper getGroupHelper() {
+    public GroupHelper groups() {
         return groupHelper;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contacts() {
         return contactHelper;
     }
 }

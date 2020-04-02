@@ -1,24 +1,38 @@
 package iss.work.addressbook.tests;
 
 import iss.work.addressbook.appmanager.ApplicationManager;
+import iss.work.addressbook.generators.ContactsDataGenerator;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class TestBase {
+    Logger logger = LoggerFactory.getLogger(TestBase.class);
+    protected static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
-    private final String browser = BrowserType.FIREFOX;
-
-    protected final ApplicationManager app = new ApplicationManager();
-
-    @BeforeClass(alwaysRun = true)
+    @BeforeSuite
     public void setUp() throws Exception {
-        app.init(browser);
+        app.init();
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterSuite(alwaysRun = true)
     public void tearDown() throws Exception {
         app.stop();
     }
 
+    @BeforeMethod
+    public void logTestStart(Method m, Object[] p) throws Exception {
+        logger.info("Start test " + m.getName() + " with parameters" + Arrays.asList(p));
+    }
+
+    @BeforeMethod(alwaysRun = true)
+    public void logTestStop(Method m, Object[] p) throws Exception {
+        logger.info("Stop test " + m.getName() + " with parameters" + Arrays.asList(p));
+    }
 }

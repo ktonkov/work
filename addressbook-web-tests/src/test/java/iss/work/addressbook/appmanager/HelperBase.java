@@ -3,10 +3,6 @@ package iss.work.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.util.List;
 
 public class HelperBase {
     protected WebDriver driver;
@@ -17,14 +13,6 @@ public class HelperBase {
 
     protected void click(By locator) {
         driver.findElement(locator).click();
-    }
-
-    protected void click(WebElement element) {
-        element.click();
-    }
-
-    protected void click(List<WebElement> elements, int index) {
-        elements.get(index).click();
     }
 
     protected void type(
