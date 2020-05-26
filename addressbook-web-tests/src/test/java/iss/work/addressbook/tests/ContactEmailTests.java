@@ -2,7 +2,7 @@ package iss.work.addressbook.tests;
 
 import iss.work.addressbook.model.ContactData;
 import iss.work.addressbook.model.Contacts;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactEmailTests extends TestBase {
     private Contacts before;
 
-    @BeforeClass
+    @BeforeMethod
     public void prepare() {
         app.goTo().homePage();
         if (app.contacts().getAll().size() == 0) {

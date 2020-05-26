@@ -4,9 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import iss.work.addressbook.model.ContactData;
 import iss.work.addressbook.model.Contacts;
-import iss.work.addressbook.model.GroupData;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -17,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -53,7 +50,7 @@ public class ContactModificationTests extends TestBase {
         return list.iterator();
     }
 
-    @BeforeClass
+    @BeforeMethod
     public void prepare() {
         app.goTo().homePage();
         if (app.contacts().getAll().size() == 0) {
