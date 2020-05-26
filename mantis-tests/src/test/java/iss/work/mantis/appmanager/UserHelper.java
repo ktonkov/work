@@ -21,14 +21,22 @@ public class UserHelper extends HelperBase {
             return new Users(userCache);
         }
         userCache = new Users();
-        Pattern pattern = Pattern.compile("(\\d+)");
-        for (WebElement row : driver.findElements(By.tagName("tr"))) {
+        Pattern pattern = Pattern.compile("(\\d+$)");
+        List<WebElement> rows = driver.findElements(By.tagName("tr"));
+        for (WebElement row : rows) {
             List<WebElement> cells = row.findElements(By.tagName("td"));
-            UserData users = new UserData()
-                    .withId(Integer.parseInt(pattern.matcher(cells.get(0).getAttribute("href")).group(0)))
-                    .withUsername(cells.get(0).getText())
-                    .withEmail(cells.get(2).getText());
-            userCache.add(users);
+            if (cells.size() > 0) {
+                String href = cells.get(0).findElement(By.tagName("a")).getAttribute("href");
+                Matcher matcher = pattern.matcher(href);
+                boolean b = matcher.find();
+                int i = matcher.groupCount();
+                String id = matcher.group(0);
+                UserData users = new UserData()
+                        .withId(Integer.parseInt(id))
+                        .withUsername(cells.get(0).getText())
+                        .withEmail(cells.get(2).getText());
+                userCache.add(users);
+            }
         }
         return new Users(userCache);
     }
@@ -39,7 +47,9 @@ public class UserHelper extends HelperBase {
 
     public void changeUserPassword(UserData user) {
         initUserModificationById(user.getId());
-        click(By.cssSelector("input[value='Reset Password']"));
+        //WebElement btnGroup = driver.findElement(By.className("btn-group"));
+        //btnGroup.findElement(By.id("manage-user-reset_form")).click();
+        click(By.id("manage-user-reset-form"));
     }
 
 }

@@ -13,9 +13,9 @@ public class SessionHelper extends HelperBase {
             String password
     ) {
         type(By.name("username"), username);
-        click(By.cssSelector("input[value=\"Login\"]"));
+        click(By.cssSelector("input[type=\"submit\"]"));
         type(By.name("password"), password);
-        click(By.cssSelector("input[value=\"Login\"]"));
+        click(By.cssSelector("input[type=\"submit\"]"));
         return app;
     }
 }
