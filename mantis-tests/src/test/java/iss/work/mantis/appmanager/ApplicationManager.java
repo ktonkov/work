@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.RemoteException;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +22,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 
+import javax.xml.rpc.ServiceException;
+
 import static org.testng.Assert.fail;
 
 public class ApplicationManager {
@@ -35,6 +39,7 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private UserHelper userHelper;
+    private SoapHelper soapHelper;
 
     public ApplicationManager(String browser){
         this.browser = browser;
@@ -118,6 +123,13 @@ public class ApplicationManager {
         return mailHelper;
     }
 
+    public SoapHelper soap() {
+        if (soapHelper == null) {
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper;
+    }
+
     public SessionHelper session() {
         if (sessionHelper == null) {
             sessionHelper = new SessionHelper(this);
@@ -167,5 +179,12 @@ public class ApplicationManager {
         }
         userHelper.changeUserPassword(user);
 
+    }
+
+    public boolean isIssueOpen(int issueId) throws RemoteException, ServiceException, MalformedURLException {
+        if (soapHelper == null) {
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper.isIssueOpen(issueId);
     }
 }
