@@ -27,7 +27,6 @@ public class DataSet {
 
     public DataSet(DataFile jsonFile, ArrayList<DataFile> images) throws IOException {
         this.jsonFile = jsonFile;
-        //this.mask = mask;
         this.images = images;
         objects = new ArrayList<ArrayList<DataObject>>();
 
@@ -161,12 +160,6 @@ public class DataSet {
     public ArrayList<DataFile> getImages() {
         return images;
     }
-/*
-    public void setJsonObject(JsonObject jsonObject) {
-        this.jsonObject = jsonObject;
-    }
-*/
-
 
     public void addObjects(ArrayList<DataObject> objects) {
         this.objects.add(objects);

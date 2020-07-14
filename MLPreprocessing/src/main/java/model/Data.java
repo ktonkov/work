@@ -24,7 +24,6 @@ public class Data {
         for (File file : filesArray) {
             if (!file.isDirectory()) {
                 DataFile dataFile = new DataFile(file);
-                //allFiles.add(dataFile);
                 if (dataFile.getExt().equals("json")) {
                     jsonFiles.add(dataFile);
                 } else if ((dataFile.getExt().equals("png") || dataFile.getExt().equals("jpg"))
@@ -150,45 +149,6 @@ public class Data {
             file.addObjects(objects);
         }
     }
-/*
-    public void filterObjects(String key, String value) {
-        for (DataSet file : dataSets) {
-            ArrayList<DataObject> objectsToRemove = new ArrayList<DataObject>();
-            for (DataObject object : file.getObjects()) {
-                if (object.getJsonElement() == null || !object.getJsonElement().getAsJsonObject().has(key) || !object.getJsonElement().getAsJsonObject().get(key).getAsString().equals(value)) {
-                    objectsToRemove.add(object);
-                }
-            }
-            file.removeAll(objectsToRemove);
-        }
-    }
-
-    public void filterObjectsStartsWith(String key, String value) {
-        for (DataSet file : dataSets) {
-            ArrayList<DataObject> objectsToRemove = new ArrayList<DataObject>();
-            for (DataObject object : file.getObjects()) {
-                if (!object.getJsonElement().getAsJsonObject().get(key).getAsString().startsWith(value)) {
-                    objectsToRemove.add(object);
-                }
-            }
-            file.removeAll(objectsToRemove);
-        }
-    }
-
-    public void validateObjectsCount(int count) {
-        ArrayList<DataSet> tempFilesToRemove = new ArrayList<DataSet>();
-        for (DataSet file : dataSets) {
-            if (file.getObjects().size() != count) {
-                tempFilesToRemove.add(file);
-                //maskFiles.remove(file.getMask());
-                imageFiles.removeAll(file.getImages());
-                jsonFiles.remove(file.getJsonFile());
-            }
-        }
-        removeFiles(tempFilesToRemove);
-        System.out.println("Jsons with object count not  " + count + ": " + tempFilesToRemove.size());
-    }
-*/
 
     public void validateCoordPlace(String path) {
         ArrayList<DataSet> tempFilesToRemove = new ArrayList<DataSet>();
